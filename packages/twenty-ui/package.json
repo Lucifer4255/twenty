@@ -11,6 +11,6 @@
     }
   },
   "scripts": {
-    "build": "npx vite build"
+    "build": "node init && npx vite build"
   }
 }
