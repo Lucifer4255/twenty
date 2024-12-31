@@ -1,24 +1,34 @@
+import { ActionViewType } from '@/action-menu/actions/types/ActionViewType';
+import { useActionMenuEntries } from '@/action-menu/hooks/useActionMenuEntries';
+import { useActionMenuEntriesWithCallbacks } from '@/action-menu/hooks/useActionMenuEntriesWithCallbacks';
 import { ObjectMetadataItem } from '@/object-metadata/types/ObjectMetadataItem';
 import { useEffect } from 'react';
-import { useSingleRecordActions } from '../hooks/useSingleRecordActions';
 
 export const SingleRecordActionMenuEntrySetterEffect = ({
   objectMetadataItem,
+  viewType,
 }: {
   objectMetadataItem: ObjectMetadataItem;
+  viewType: ActionViewType;
 }) => {
-  const { registerSingleRecordActions, unregisterSingleRecordActions } =
-    useSingleRecordActions({
-      objectMetadataItem,
-    });
+  const { addActionMenuEntry, removeActionMenuEntry } = useActionMenuEntries();
+
+  const { actionMenuEntries } = useActionMenuEntriesWithCallbacks(
+    objectMetadataItem,
+    viewType,
+  );
 
   useEffect(() => {
-    registerSingleRecordActions();
+    for (const action of actionMenuEntries) {
+      addActionMenuEntry(action);
+    }
 
     return () => {
-      unregisterSingleRecordActions();
+      for (const action of actionMenuEntries) {
+        removeActionMenuEntry(action.key);
+      }
     };
-  }, [registerSingleRecordActions, unregisterSingleRecordActions]);
+  }, [actionMenuEntries, addActionMenuEntry, removeActionMenuEntry]);
 
   return null;
 };
