@@ -1,6 +1,6 @@
 import { useAggregateRecordsForRecordTableColumnFooter } from '@/object-record/record-table/record-table-footer/hooks/useAggregateRecordsForRecordTableColumnFooter';
 import styled from '@emotion/styled';
-import { isDefined } from 'twenty-ui';
+import { isDefined, OverflowingTextWithTooltip } from 'twenty-ui';
 
 const StyledText = styled.span`
   overflow: hidden;
@@ -16,25 +16,28 @@ const StyledText = styled.span`
   z-index: 1;
 `;
 
-const StyledValueContainer = styled.div`
+const StyledScrollableContainer = styled.div`
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const StyledValueContainer = styled(StyledScrollableContainer)`
   align-items: center;
   display: flex;
-  flex: 1 0 0;
   gap: 4px;
   height: 32px;
   justify-content: flex-end;
-  padding: 8px;
+  padding: 0 8px;
 `;
 
-const StyledLabel = styled.div`
-  align-items: center;
-  display: flex;
-  gap: 4px;
-`;
-
-const StyledValue = styled.div`
+const StyledValue = styled(StyledScrollableContainer)`
   color: ${({ theme }) => theme.color.gray60};
-  flex: 1 0 0;
 `;
 
 export const RecordTableColumnAggregateFooterValue = ({
@@ -57,7 +60,7 @@ export const RecordTableColumnAggregateFooterValue = ({
             <></>
           ) : (
             <>
-              <StyledLabel>{aggregateLabel}</StyledLabel>
+              <OverflowingTextWithTooltip text={aggregateLabel} />
               <StyledValue>{aggregateValue}</StyledValue>
             </>
           )}
