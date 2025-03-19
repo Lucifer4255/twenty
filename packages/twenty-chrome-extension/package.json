@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "npx vite build"
+    "build": "node init && npx vite build"
   },
   "dependencies": {
     "twenty-shared": "workspace:*"
