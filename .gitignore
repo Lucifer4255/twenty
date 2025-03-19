@@ -43,3 +43,5 @@ dump.rdb
 /flake.nix
 
 .crowdin.yml
+config.bat
+node_modules
