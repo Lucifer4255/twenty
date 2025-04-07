@@ -5,7 +5,7 @@
   "module": "dist/twenty-shared.esm.js",
   "license": "AGPL-3.0",
   "scripts": {
-    "build": "preconstruct build"
+    "build": "node init && preconstruct build"
   },
   "engines": {
     "node": "^18.17.1",
