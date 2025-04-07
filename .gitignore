@@ -44,3 +44,5 @@ dump.rdb
 
 .crowdin.yml
 .react-email/
+config.bat
+node_modules
